@@ -1,52 +1,60 @@
+<body>
 <?php
 include 'temp/head.php';
-include 'temp/header.php';
-include 'temp/navbar.php';
-
-$mysqli=new mysqli ("localhost", "root", "","baked"); //Подключаемся к базе данных
-$mysqli->set_charset("utf8"); //Устанавливаем кодировку
- if (!empty($_POST)) {
-   
-
-    $login = $_POST['login'];
-    $passw=$_POST['passw'];
-    
-    $hashPassword = password_hash($passw, PASSWORD_DEFAULT);
-  
-       $sql = "INSERT INTO users (login, passw) VALUES ('$login','$hashPassword')";
-   
-       $result = $mysqli->query($sql);
-         }
-    
-    ?>
-<section>
-		<div class="container">
-		<div class="row">
-        <div class="col-md-12">
-            <h1 class="font-weight-light">Регистрация</h1>
-            <hr>
+include 'temp/mysql.php';
+include 'temp/nav.php';
+?>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Регистрация</h2>
+            <form method="POST" action="reg_mysql.php">
+            <div class="mb-3">
+                <label class="form-label">Ваше имя</label>
+                <input type="text" class="form-control" name="firstname" required>
+                <div class="form-text">Не более 16 символов.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ваша фамилия</label>
+                <input type="text" class="form-control" name="lastname" required>
+                <div class="form-text">Не более 16 символов.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ваше отчество</label>
+                <input type="text" class="form-control" name="surname" required>
+                <div class="form-text">Не более 16 символов.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Логин</label>
+                <input type="text" class="form-control" name="login" required>
+                <div class="form-text">Не более 16 символов.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Пароль</label>
+                <input type="password" class="form-control" name="password" required>
+                <div class="form-text">Не более 24 символа.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ваш адрес</label>
+                <input type="text" class="form-control" name="address" required>
+                <div class="form-text">Не более 24 символа.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Номер телефона</label>
+                <input type="phone" class="form-control" name="phone" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ваша роль</label>
+                <select class="form-control" name="role">
+                    <option value="Клиент">Клиент</option>
+                    <option value="Страховой агент">Страховой агент</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Далее</button>
+            </form>
         </div>
     </div>
-			<div class="row">
-				<div class="col-lg-3"></div>
-				<div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title text-center font-weight-light">Зарегистрироваться</h3>
-                    <p class="card-text text-center text-muted">Уже есть аккаунт? Тогда используйте страницу <a href="auth.php">Авторизации</a></p>
-                  
-                    <hr>
-                    <form action="" method="POST">
-                 <div class="form-group">
-                            <label for="exampleInputlogin">Логин</label>
-                            <input name="login" required type="text" class="form-control" placeholder="Введите логин" >
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Пароль</label>
-                            <input name="passw" required type="password" class="form-control" placeholder="Введите пароль">
-                        </div> 
-                        <div class="form-row justify-content-center">
-						<a href="auth.php"><button type="submit" class="btn btn-outline-info">Зарегистрироваться</button></a>
-                        </div>
-                    </form>
-                   
+</div>
+<?php include 'temp/footer.php';  ?>
+</body>
+</html>
